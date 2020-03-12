@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.asus.robotframework.API.RobotCallback;
 import com.asus.robotframework.API.RobotCmdState;
@@ -19,9 +20,15 @@ import org.json.JSONObject;
 // public class MainActivity extends AppCompatActivity {
 public class MainActivity extends RobotActivity {
     public final static String TAG = "helloWorld";
+
+    /**
+     * 必要的 DOMAIN UUID
+     */
     public final static String DOMAIN = "4015F56688D64128B60A42CD2BDCA129";
 
     private static TextView mTextView;
+    private static TextView mTextView2;
+    private static TextView mTextView3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +36,8 @@ public class MainActivity extends RobotActivity {
         setContentView(R.layout.activity_main);
         robotAPI.robot.setExpression(RobotFace.HIDEFACE);
         mTextView = (TextView) findViewById(R.id.textview_info);
+        mTextView2 = (TextView) findViewById(R.id.textview_info2);
+        mTextView3 = (TextView) findViewById(R.id.textview_info3);
     }
 
     public static RobotCallback robotCallback = new RobotCallback() {
@@ -70,6 +79,7 @@ public class MainActivity extends RobotActivity {
             String text;
             text = "onEventUserUtterance: " + jsonObject.toString();
             Log.d(TAG, text);
+            mTextView.setText("onEventUserUtterance: " + jsonObject.toString());
         }
 
         @Override
@@ -77,17 +87,25 @@ public class MainActivity extends RobotActivity {
             String text;
             text = "onResult: " + jsonObject.toString();
             Log.d(TAG, text);
+            mTextView.setText("onResult: " + jsonObject.toString());
+/*            mTextView2.setText("Intention Id = ");
+            mTextView3.setText("Result City = ");*/
 
 
+            /**
+             *  讀取 IntentionId 的資訊。
+             */
             String sIntentionID = RobotUtil.queryListenResultJson(jsonObject, "IntentionId");
             Log.d(TAG, "Intention Id = " + sIntentionID);
+            mTextView2.setText("Intention Id = " + sIntentionID);
 
             if(sIntentionID.equals("helloWorld")) {
                 String sSluResultCity = RobotUtil.queryListenResultJson(jsonObject, "myCity1", null);
                 Log.d(TAG, "Result City = " + sSluResultCity);
+                mTextView3.setText("Result City = " + sSluResultCity);
 
                 if(sSluResultCity!= null) {
-                    mTextView.setText("You are now at " + sSluResultCity);
+                    mTextView3.setText("You are now at " + sSluResultCity);
                 }
             }
         }
@@ -110,7 +128,10 @@ public class MainActivity extends RobotActivity {
         robotAPI.robot.setExpression(RobotFace.HIDEFACE);
 
         // jump dialog domain
-        robotAPI.robot.jumpToPlan(DOMAIN, "lanuchHelloWolrd_Plan");
+        /**
+         * 指向開始的 plan 位址
+         */
+        robotAPI.robot.jumpToPlan(DOMAIN, "ThisPlanLaunchingThisApp");
 
         // listen user utterance
         robotAPI.robot.speakAndListen("Which city do you like?", new SpeakConfig().timeout(20));

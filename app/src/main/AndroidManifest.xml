@@ -3,11 +3,6 @@
     package="org.hopto.dklis.hellocity">
 
 
-    <meta-data android:name="zenbo_ds_domainuuid"
-        android:value="4015F56688D64128B60A42CD2BDCA129"/>
-
-    <meta-data android:name="zenbo_ds_version_4015F56688D64128B60A42CD2BDCA129"
-        android:value="0.0.1"/>
 
     <application
         android:allowBackup="true"
@@ -16,10 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data android:name="zenbo_ds_domainuuid" android:value="4015F56688D64128B60A42CD2BDCA129"/>
+        <meta-data android:name="zenbo_ds_version_4015F56688D64128B60A42CD2BDCA129" android:value="0.0.2"/>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.asus.intent.category.ZENBO" />
+                <category android:name="com.asus.intent.category.ZENBO_LAUNCHER" />
 
+                <!-- please comment out the following line when you want to launch to Zenbo App Store -->
+                <!-- See Zenbo Developer Web: Zenbo-SDK-Getting-Started: Important notes on Zenbo APP developing -->
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
