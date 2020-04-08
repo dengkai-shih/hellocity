@@ -12,8 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!--
         <meta-data android:name="zenbo_ds_domainuuid" android:value="4015F56688D64128B60A42CD2BDCA129"/>
         <meta-data android:name="zenbo_ds_version_4015F56688D64128B60A42CD2BDCA129" android:value="0.0.2"/>
+        -->
+
+        <meta-data android:name="zenbo_ds_domainuuid" android:value="2191076A612747EA9A05FE74651D1734"/>
+        <meta-data android:name="zenbo_ds_version_2191076A612747EA9A05FE74651D1734" android:value="0.0.1"/>
 
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -5,4 +5,15 @@
                                     * Hello Black City\n
                                     * Hello White City\n
     </string>
+
+    <string-array name="ds_string">
+        <item>首先您必須持有影印卡才能影印列印資料，</item>
+        <item>若沒有影印卡請先至三樓櫃台洽詢購買。</item>
+        <item>若您是要列印資料，請先至櫃檯借閱電腦座位，</item>
+        <item>在列印資料的過程，電腦會跳列印出對話視窗，</item>
+        <item>請輸入影印卡上的卡號後，再到影印機插入卡片即可列印。</item>
+        <item>若您是要影印資料，您可以直接到櫃檯前的影印機，</item>
+        <item>插入影印卡就能影印您所需要的資料。</item>
+        <item>除了四樓之外，圖資處，一、三、五樓皆提供影印、列印服務。</item>
+    </string-array>
 </resources>

@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.asus.robotframework.API.RobotCallback;
 import com.asus.robotframework.API.RobotCmdState;
+import com.asus.robotframework.API.RobotCommand;
 import com.asus.robotframework.API.RobotErrorCode;
 import com.asus.robotframework.API.RobotFace;
 import com.asus.robotframework.API.RobotUtil;
@@ -24,11 +25,15 @@ public class MainActivity extends RobotActivity {
     /**
      * 必要的 DOMAIN UUID
      */
-    public final static String DOMAIN = "4015F56688D64128B60A42CD2BDCA129";
+    // public final static String DOMAIN = "4015F56688D64128B60A42CD2BDCA129";
+    public final static String DOMAIN = "2191076A612747EA9A05FE74651D1734";
 
     private static TextView mTextView;
     private static TextView mTextView2;
     private static TextView mTextView3;
+    private static TextView mTextView4;
+    private static TextView mTextView5;
+    private static String[] speak_test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,17 +43,37 @@ public class MainActivity extends RobotActivity {
         mTextView = (TextView) findViewById(R.id.textview_info);
         mTextView2 = (TextView) findViewById(R.id.textview_info2);
         mTextView3 = (TextView) findViewById(R.id.textview_info3);
+        mTextView4 = (TextView) findViewById(R.id.textview_info4);
+        mTextView5 = (TextView) findViewById(R.id.textview_info5);
+
+        speak_test = getResources().getStringArray(R.array.ds_string);
+
+        for (int i = 0; i < speak_test.length; i += 1) {
+            robotAPI.robot.speak(speak_test[i] , new SpeakConfig().timeout(1));
+        }
     }
 
     public static RobotCallback robotCallback = new RobotCallback() {
         @Override
         public void onResult(int cmd, int serial, RobotErrorCode err_code, Bundle result) {
             super.onResult(cmd, serial, err_code, result);
+            String txt_out = "onResult:"
+                    + RobotCommand.getRobotCommand(cmd).name()
+                    + ", serial:" + serial + ", err_code:" + err_code
+                    + ", state:" + result.toString();
+
+            mTextView4.setText(txt_out);
         }
 
         @Override
         public void onStateChange(int cmd, int serial, RobotErrorCode err_code, RobotCmdState state) {
             super.onStateChange(cmd, serial, err_code, state);
+            String txt_out = "onStateChange:"
+                    + RobotCommand.getRobotCommand(cmd).name()
+                    + ", serial:" + serial + ", err_code:" + err_code
+                    + ", state:" + state.toString();
+
+            mTextView5.setText(txt_out);
         }
 
         @Override
